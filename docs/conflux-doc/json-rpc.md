@@ -75,9 +75,9 @@ JSON-RPC是一种无状态、轻量级的远程过程调用（RPC）协议。该
 
 
 ## Curl 范例解释
-Curl选项可能会返回一个关于content type报错的响应，这是因为 --data 选项会将content type设置为 application/x-www-form-urlencoded 。如果你的节点无法执行，手动设置header -H "Content-Type: application/json "。
+Curl可能会返回一个关于content type报错的响应，这是因为 --data 选项会将content type设置为 application/x-www-form-urlencoded 。如果你的节点无法执行，可手动设置为 header -H "Content-Type: application/json "。
 
-范例也包含了URL/IP和端口的组合，它们必须作为最后的参数传给curl。
+范例也包含了URL/IP和端口的组合，它们必须作为最后的参数传给 curl。
 例如 ```http://localhost:12345```
 
 例子： [cfx_getbestblockhash](#cfx_getbestblockhash)
@@ -120,11 +120,11 @@ params: [
 * `blockHash`: `DATA`, 32字节-此交易存在并已执行的区块的哈希。交易等待状态时为`null`。
 * `contractCreated`: `DATA`，20字节-已创建的合约地址。当为不创建交易的合约时为`null`。
 * `data`: `DATA` - 与交易一起发送的数据。
-* `from`: `DATA`, 20字节-发送方地址。
+* `from`: `DATA`, 20字节-发送者地址。
 * `gas`: `QUANTITY` - 发送者提供的gas。
-* `gasPrice`: `QUANTITY` - 发送方提供的gas价格（以Drip为单位）。
+* `gasPrice`: `QUANTITY` - 发送者提供的gas价格（以Drip为单位）。
 * `hash`: `DATA`, 32字节-交易的哈希。
-* `nonce`: `QUANTITY` - 发送方在此之前进行的交易次数。
+* `nonce`: `QUANTITY` - 发送者在此之前进行的交易次数。
 * `r`: `DATA`, 32字节-ECDSA签名r。
 * `s`: `DATA`, 32字节-ECDSA签名s。
 * `status`: `QUANTITY` - 0代表成功，1代表发生错误，当交易被跳过或未打包时为`null` 。
@@ -176,23 +176,23 @@ params: [
 ```
 ##### 返回值
 `Object` - 区块对象，如果未找到任何区块，则为`null`:
-* `adaptive`: `Boolean` - 如果为`true` ，说明区块的权重符合GHAST规则，否则为`false`。
-* `blame`: `QUANTITY` - 如果为0，说明在其引用路径上没有blame区块；如果大于0，则说明在其引用路径上最近的blame区块距离为`blame`。
-* `deferredLogsBloomHash`: `DATA`, 32字节-延迟日志的Bloom哈希。
+* `adaptive`: `Boolean` - 如果为`true` ，说明区块的权重符合 GHAST 规则，否则为`false`。
+* `blame`: `QUANTITY` - 如果为0，说明在其引用路径上没有 blame 区块；如果大于0，则说明在其引用路径上最近的 blame 区块距离为`blame`。
+* `deferredLogsBloomHash`: `DATA`, 32字节-延迟日志的 Bloom 哈希。
 * `deferredReceiptsRoot`: `DATA`, 32字节-延迟执行后的区块的接收的哈希值。
 * `deferredStateRoot`: `DATA`, 32字节-延迟执行后，区块的最终状态排列的根。
 * `difficulty`: `QUANTITY` - 此区块的难度的整数。
 * `epochNumber`: `QUANTITY` - 用户视图中的当前区块纪元号。如果它不处在最佳区块集合或未确定纪元号，则为`null` 。
-* `gasLimit`: `QUANTITY` - 此区块中允许的最大gas值。
+* `gasLimit`: `QUANTITY` - 此区块中允许的最大 gas 值。
 * `hash`: `DATA`, 32 Bytes - 区块链的哈希值。当状态为等待的时为`null`。
 * `height`: `QUANTITY` - 区块的高度。当状态为等待的时为`null`。
 * `miner`: `DATA`, 20 Bytes - 获得采矿奖励的受益人地址。
 * `nonce`: `DATA`, 8 Bytes - 生成的工作量证明的哈希。当状态为等待的时为`null`。 
 * `parentHash`: `DATA`, 32 Bytes - 父区块的哈希。
 * `powQuality`: , `DATA`, Bytes - 生成的工作量证明的哈希。当状态为等待的时为`null`。
-* `refereeHashes`: `Array` - referee哈希数组。
+* `refereeHashes`: `Array` - referee 哈希数组。
 * `size`: `QUANTITY` - 此区块的大小（以字节为单位）。
-* `timestamp`: `QUANTITY` - 该区块被收录时的UNIX时间戳。
+* `timestamp`: `QUANTITY` - 该区块被收录时的 UNIX 时间戳。
 * `transactions`: `Array` - 交易对象的数组，或32字节的交易哈希，具体取决于最后给定的参数。
 * `transactionsRoot`: `DATA`, 32 Bytes - 区块交易的哈希。
 
@@ -541,8 +541,8 @@ params: [
 
 `Object` - 存储根对象, 如果合约不存在返回`null` :
 
-* `delta`: `DATA`, 32 Bytes - delta排序下的存储根。
-* `intermediate`: `DATA`, 32 Bytes - intermediate排序中的存储根.
+* `delta`: `DATA`, 32 Bytes - delta 排序下的存储根。
+* `intermediate`: `DATA`, 32 Bytes - intermediate 排序中的存储根.
 * `snapshot`: `DATA`, 32 Bytes - 快照中的存储根。
 
 如果所有这三个字段可以匹配此RPC的两次调用，则可保证合约的存储是相同的。 如果它们不匹配，则存储可能已更改（或系统已过渡到新状态）。
@@ -892,7 +892,7 @@ params: [
 * `stakingBalance`: `QUANTITY` - 帐户的质押余额。
 * `collateralForStorage`: `QUANTITY` - 帐户的抵押品存储。
 * `accumulatedInterestReturn`: `QUANTITY` -帐户的累计无误收益。
-* `admin`: DATA`, 20 Bytes - 账户的管理者。
+* `admin`: `DATA`, 20 Bytes - 账户的管理者。
 
 ##### 使用范例
 ```
