@@ -8,38 +8,38 @@ keywords:
   - json-rpc
   - sdk
 ---
-Conflux JSON-RPC API是一组接口的集合，允许您使用JSON-RPC协议中的HTTP连接与本地或远程的Conflux节点进行交互。
+Conflux JSON-RPC API 是一组接口的集合，允许您使用JSON-RPC协议中的 HTTP 连接与本地或远程的 Conflux 节点进行交互。
 
-以下是带有示例的API参考文档。
+以下是带有示例的 API 参考文档。
 
 ## JSON-RPC
-JSON是一种轻量级的数据交换格式。 它可以表示数字，字符串，有序数值队列，和键值对集合。
+JSON 是一种轻量级的数据交换格式。 它可以表示数字，字符串，有序数值队列，和键值对集合。
 
-JSON-RPC是一种无状态、轻量级的远程过程调用（RPC）协议。该规范主要定义了几种数据结构以及与之相关的处理规则。它是与传输方式无关的，可以用在socket、HTTP 或各种消息传送环境。 它使用JSON（RFC 4627）作为数据格式。
+JSON-RPC 是一种无状态、轻量级的远程过程调用（RPC）协议。该规范主要定义了几种数据结构以及与之相关的处理规则。它是与传输方式无关的，可以用在 socket、HTTP 或各种消息传送环境。 它使用 JSON（RFC 4627）作为数据格式。
 
 
 ## JavaScript API
-我们还提供了一个JavaScript库[js-conflux-sdk](https://github.com/Conflux-Chain/js-conflux-sdk) ，供您从JavaScript应用程序内部与Conflux节点进行交互，为RPC提供了方便的接口。
+我们还提供了一个 JavaScript 库[js-conflux-sdk](https://github.com/Conflux-Chain/js-conflux-sdk) ，供您从 JavaScript 应用程序内部与 Conflux 节点进行交互，为 RPC 提供了方便的接口。
 
 ## JSON-RPC 节点和支持
-目前，Conflux拥有一个支持JSON-RPC 2.0和HTTP的[Rust 实现](https://github.com/Conflux-Chain/conflux-rust) 。
+目前，Conflux 拥有一个支持 JSON-RPC 2.0 和 HTTP 的 [Rust 实现](https://github.com/Conflux-Chain/conflux-rust) 。
 
 ## 十六进制值的编码
-当前，通过JSON传输，有两种关键数据类型：无格式字节数组和数量。 两者都以十六进制编码传输，但有不同的格式要求：
+当前，通过 JSON 传输，有两种关键数据类型：无格式字节数组和数量。 两者都以十六进制编码传输，但有不同的格式要求：
 
-当编码**数量**（整数，数字）时：编码为十六进制，前缀为“ 0x”，这是最紧凑的表现形式（小例外：零表示为“ 0x0”）。 例子：
+当编码**数量**（整数，数字）时：编码为十六进制，前缀为“0x”，这是最紧凑的表现形式（小例外：零表示为"0x0"）。 例子：
 
 * 0x41 （十进制65）
 * 0x400 （十进制1024）
-* WRONG: 0x（至少有一位数字 - 零为“ 0x0”）
+* WRONG: 0x（至少有一位数字 - 零为"0x0"）
 * WRONG: 0x0400（不允许以零开头）
 * WRONG: ff（必须以0x为前缀）
 
-当编码 **无格式数据**（字节数组，帐户地址，哈希值，字节码数组）时：十六进制编码，前缀为“ 0x”，每个字节包含两个十六进制数字。 例子：
+当编码 **无格式数据**（字节数组，帐户地址，哈希值，字节码数组）时：十六进制编码，前缀为"0x"，每个字节包含两个十六进制数字。 例子：
 
-* 0x41 (长度为1，“A”)
-* 0x004200 (长度为3，“ \ 0B \ 0”)
-* 0x (长度为0，“”)
+* 0x41 (长度为1，"A")
+* 0x004200 (长度为3，"\ 0B \ 0")
+* 0x (长度为0，"")
 * WRONG: 0xf0f0f (必须为偶数位数)
 * WRONG: 004200 (必须以0x开头)
 
@@ -75,9 +75,9 @@ JSON-RPC是一种无状态、轻量级的远程过程调用（RPC）协议。该
 
 
 ## Curl 范例解释
-Curl选项可能会返回一个关于content type报错的响应，这是因为 --data 选项会将content type设置为 application/x-www-form-urlencoded 。如果你的节点无法执行，手动设置header -H "Content-Type: application/json "。
+Curl选项可能会返回一个关于content type报错的响应，这是因为 --data 选项会将 content type 设置为 application/x-www-form-urlencoded 。如果你的节点无法执行，手动设置 header -H "Content-Type: application/json "。
 
-范例也包含了URL/IP和端口的组合，它们必须作为最后的参数传给curl。
+范例也包含了 URL/IP 和端口的组合，它们必须作为最后的参数传给 curl。
 例如 ```http://localhost:12345```
 
 例子： [cfx_getbestblockhash](#cfx_getbestblockhash)
@@ -87,9 +87,9 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"cfx_getBestBlockHash","params":[
 ```
 
 ## 从 Ethereum JSON-RPC 移植
-以太坊和Conflux之间，一些JSON-RPCs存在对应关系。
+以太坊和 Conflux 之间，一些 JSON-RPCs 存在对应关系。
 
-尽管JSON-RPC的细节可能彼此不同，以下映射表有助于从以太坊迁移到Conflux：
+尽管JSON-RPC的细节可能彼此不同，以下映射表有助于从以太坊迁移到 Conflux：
 * eth_gasPrice => cfx_gasPrice
 * eth_blockNumber => cfx_epochNumber
 * eth_getBalance => cfx_getBalance
