@@ -7,15 +7,15 @@ keywords:
   - conflux
   - install
 ---
-##  安装构建依赖项
+## 安装构建依赖项
 
-下面是一个关于如何从源代码构建Conflux并使节点运行的指南。
+下面是一个关于如何从源代码构建 Conflux 并运行一个节点的指南。
 
 
 安装构建依赖项
-Conflux需要**Rust1.42.0**、`clang`和`sqlite`来构建。
+Conflux 需要**Rust 1.42.0**、`clang`和`sqlite`来构建。
 
-我们建议在通过 [rustup](https://www.rustup.rs/)安装Rust。如果您还没有rustup或clang，可以这样安装：
+我们推荐通过 [rustup](https://www.rustup.rs/)安装Rust。如果您还没有 rustup 或 clang，可以这样安装：
 
 * Linux:
 
@@ -49,31 +49,31 @@ Conflux需要**Rust1.42.0**、`clang`和`sqlite`来构建。
           $ make
           $ sudo make install
   
- * OSX:
+ * 苹果系统 OSX:
 
         $ curl https://sh.rustup.rs -sSf | sh
         $ rustup install 1.42.0
 
-    如果需要使用它来安装clang，您可能需要安装brew；
+    如果需要使用 brew 来安装 clang 的话，您可能需要先安装 brew：
 
           $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-    clang带有Xcode命令行工具，也可以与自制程序一起安装：
+    clang 带有 Xcode 命令行工具，也可以使用 homebrew 来安装：
 
         $ brew install llvm    
   
-* Windows:
+* Windows 系统:
 
-    确保您安装了支持C++的2015版VisualStudio。然后，从网址 https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe. 下载并运行`rustup`安装文件， 启动“VS2015 x64 Native Tools Command Prompt”， 并使用以下命令安装和设置msvc工具链：
+    首先请确保您安装了 Visual Studio 2015 并选择了 C++ 支持。接下来，从网址 https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe. 下载并运行`rustup`安装文件， 启动 “VS2015 x64 Native Tools Command Prompt”， 并使用如下命令安装和设置 msvc 工具链：
 
         $ rustup default stable-x86_64-pc-windows-msvc
 
-    `clang`可以与LLVM一起安装。预构建的二进制文件可以从[Download LLVM](https://releases.llvm.org/download.html#8.0.0)下载。确保按照说明将LLVM添加到系统路径。
+    `clang` 可以与 LLVM 一起安装。预构建的二进制文件可以从 [Download LLVM](https://releases.llvm.org/download.html#8.0.0) 下载。确保按照说明将 LLVM 添加到 System PATH。
 
-确保这些二进制文件位于您的路径中（安装rustup后将显示该指令）。之后，您应该能够从源代码构建Conflux。
+确保这些二进制文件位于您的 `PATH` 中（安装 `rustup` 后将显示该指令）。之后，您应该可以从源代码构建Conflux。
 
 ## 从源代码构建
-安装完上述依赖项后，现在可以克隆存储库并开始构建可执行二进制文件：
+安装完上述依赖项后，现在可以从 github， clone 我们的 repository 并开始构建可执行二进制文件：
 
 ```bash
 #下载conflux代码
@@ -84,37 +84,40 @@ $ git checkout v0.5.0.4
 # build in release mode
 $ cargo build --release
 ```
-这将在`./target/release`子目录中生成一个可执行文件。
 
-注意，当编译文件时，你会收到错误提示，在大多数情况下，这是因为你的rust版本过时。或者你的文件必须重新编译。如果您使用的是最新稳定版本的Rust，那么清理存存储空间很可能会解决此问题，请尝试：
+以上命令将在`./target/release`子目录中生成一个可执行文件。
+
+注意，当编译文件时，如果您收到了错误提示，在大多数情况下，这是因为 rust 版本过时，或者部分文件必须重新编译。如果您使用的是最新稳定版本的Rust，那么清理存储空间很可能会解决此问题，请尝试：
 
     $ cargo clean && cargo update
 
-要开始运行Conflux 全节点，可以按照运行Conflux 全节点的说明进行操作。
+如果想运行 Conflux 全节点，可以按照 [运行全节点](get_started.md#running-conflux-full-node) 的说明进行操作。 
 
-安装测试依赖项
+## 安装测试依赖项
 
-我们有一个用Python3编写的测试框架（版本>=3.6）。所需要的内容可以通过运行如下命令安装
+我们有一个用Python3编写的测试框架（版本>=3.6）。所需要的包可以通过运行如下命令安装
 
     $ ./dev-support/dep_pip3.sh
 
-Solidity编译器solc也是必需的，安装方法如下：
+Solidity 的编译器 solc 也是必需的，安装方法如下：
 
 * Ubuntu
 
       sudo add-apt-repository ppa:ethereum/ethereum
       sudo apt-get update
       sudo apt-get install solc
-* OSX
+      
+* 苹果系统 OSX
 
       brew update
       brew upgrade
       brew tap ethereum/ethereum
       brew install solidity
+      
 * 其他
 
     您可以按照[安装Solidity编译器](https://solidity.readthedocs.io/en/v0.5.7/installing-solidity.html#binary-packages)的详细说明进行操作。
 
-    请注意，最新的solidity编译器可能与Conflux不兼容，并可能导致集成测试失败。如果遇到此问题，请安装solidity编译器0.5.2版。
+    请注意，最新的 solidity 编译器可能与 Conflux 不兼容，并可能导致集成测试失败。如果遇到此问题，请安装 solidity 编译器 0.5.2 版。
 
-运行测试前，可以先生成源代码，然后按照运行测试时的说明进行操作。
+运行测试前，可以先生成源代码，然后按照[运行测试](get_started.md#running-test)中的说明进行操作。
